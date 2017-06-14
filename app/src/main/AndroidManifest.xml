@@ -1,0 +1,46 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="growing.com.recording">
+
+    <uses-feature android:name="android.hardware.wifi"/>
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/> <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.VIBRATE"/> <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.CAMERA"/> <!-- 摄像头权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus"/> <!-- 自动聚焦权限 -->
+
+
+    <application
+        android:name=".BaseApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".ScanningActivity"
+            android:launchMode="standard">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!--设置页面-->
+        <activity android:name=".SettingsActivity"/>
+        <!--同屏连接-->
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".zxing.activity.CaptureActivity"/>
+
+
+        <service android:name=".service.ForegroundService">
+            <intent-filter>
+                <action android:name="forgroundService"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
