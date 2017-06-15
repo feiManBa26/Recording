@@ -175,11 +175,12 @@ public final class MainActivity extends AppCompatActivity {
 
                 EventBus.getDefault().post(new BusMessages(MESSAGE_ACTION_STREAMING_START));
 
-                if (getAppPreference().isMinimizeOnStream()) {
-                    startActivity(new Intent(Intent.ACTION_MAIN)
-                            .addCategory(Intent.CATEGORY_HOME)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                }
+//                /*跳转到程序主入口--系统桌面*/
+//                if (getAppPreference().isMinimizeOnStream()) {
+//                        startActivity(new Intent(Intent.ACTION_MAIN)
+//                                .addCategory(Intent.CATEGORY_HOME)
+//                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//                }
 
                 break;
             case REQUEST_CODE_SETTINGS:

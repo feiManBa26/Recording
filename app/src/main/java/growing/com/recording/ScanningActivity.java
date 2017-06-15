@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import growing.com.recording.utils.CommonUtil;
@@ -22,12 +22,13 @@ import growing.com.recording.zxing.activity.CaptureActivity;
 
 public class ScanningActivity extends AppCompatActivity implements OnClickListener {
 
-    private Button mButton;
-    private EditText mEditText;
+    private Button mButton, mButton2;
+    private TextView mEditText;
     //打开扫描界面请求码
     private int REQUEST_CODE = 0x01;
     //扫描成功返回码
     private int RESULT_OK = 0xA1;
+    private static final String TAG = ScanningActivity.class.getCanonicalName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,9 +36,12 @@ public class ScanningActivity extends AppCompatActivity implements OnClickListen
         setContentView(R.layout.activity_scanning);
         mButton = (Button) findViewById(R.id.button1);
         mButton.setOnClickListener(this);
-        mEditText = (EditText) findViewById(R.id.edittext);
-
+        mEditText = (TextView) findViewById(R.id.textview);
+        mButton2 = (Button) findViewById(R.id.button2);
+        mButton2.setOnClickListener(this);
+//        mButton2.setEnabled(false);
     }
+
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
@@ -48,6 +52,18 @@ public class ScanningActivity extends AppCompatActivity implements OnClickListen
                 } else {
                     Toast.makeText(this, "请打开此应用的摄像头权限！", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.button2:
+//                if (mEditText.getText() != null && mEditText.getText().length() > 0) {
+//                    String str = mEditText.getText().toString();
+//                    int i = str.indexOf(":");
+//                    if (i != -1) {
+//                        String pcIp = str.substring(0, i);
+//                        String pcPcot = str.substring(i + 1, str.length());
+//                        Log.i(TAG, "onClick: " + pcIp);
+//                        Log.i(TAG, "onClick: " + pcPcot);
+//                    }
+//                }
                 break;
         }
     }

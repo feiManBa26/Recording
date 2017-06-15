@@ -40,6 +40,24 @@ public final class AppData {
 
     private volatile boolean isActivityRunning;
     private volatile boolean isStreamRunning;
+    private String strSocketUrl = "192.168.0.16"; //pc ip地址
+    private int strSocketProt = 8000; //pc 端口
+
+    public String getStrSocketUrl() {
+        return strSocketUrl;
+    }
+
+    public void setStrSocketUrl(String strSocketUrl) {
+        this.strSocketUrl = strSocketUrl;
+    }
+
+    public int getStrSocketProt() {
+        return strSocketProt;
+    }
+
+    public void setStrSocketProt(int strSocketProt) {
+        this.strSocketProt = strSocketProt;
+    }
 
     public AppData(final Context context) {
         mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

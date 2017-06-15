@@ -24,6 +24,7 @@ import growing.com.recording.R;
 import growing.com.recording.data.data.BusMessages;
 import growing.com.recording.data.data.HttpServer;
 import growing.com.recording.data.data.NotifyImageGenerator;
+import growing.com.recording.data.data.PcScoketServer;
 
 import static growing.com.recording.BaseApplication.getAppData;
 import static growing.com.recording.BaseApplication.getAppPreference;
@@ -54,6 +55,7 @@ public final class ForegroundService extends Service {
     private MediaProjection mMediaProjection;
     private MediaProjection.Callback mProjectionCallback;
     private HttpServer mHttpServer;
+    private PcScoketServer mPcScoketServer;
     private NotifyImageGenerator mNotifyImageGenerator;
     private HandlerThread mHandlerThread;
     private ForegroundServiceHandler mForegroundServiceTaskHandler;
@@ -99,7 +101,7 @@ public final class ForegroundService extends Service {
             }
         };
         mHttpServer = new HttpServer();
-
+        mPcScoketServer = new PcScoketServer();
         getAppData().getImageQueue().clear(); //清空缓存队列
         mNotifyImageGenerator = new NotifyImageGenerator(getApplicationContext());
         mNotifyImageGenerator.addDefaultScreen(); //添加数据到缓存队列
@@ -182,6 +184,8 @@ public final class ForegroundService extends Service {
 
         EventBus.getDefault().register(this);
         mHttpServer.start();
+        mPcScoketServer.start();
+
     }
 
     @Override
@@ -199,6 +203,7 @@ public final class ForegroundService extends Service {
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
         mHttpServer.stop(null);
+        mPcScoketServer.stop();
         stopForeground(true);
         unregisterReceiver(mBroadcastReceiver);
         unregisterReceiver(mLocalNotificationReceiver);
@@ -221,14 +226,19 @@ public final class ForegroundService extends Service {
             case MESSAGE_ACTION_HTTP_RESTART:
                 getAppData().getImageQueue().clear();
                 mHttpServer.stop(mNotifyImageGenerator.getClientNotifyImage(MESSAGE_ACTION_HTTP_RESTART));
+                mPcScoketServer.stop();
                 mNotifyImageGenerator.addDefaultScreen();
                 mHttpServer.start();
+                mPcScoketServer.start();
+
                 break;
             case MESSAGE_ACTION_PIN_UPDATE:
                 getAppData().getImageQueue().clear();
                 mHttpServer.stop(mNotifyImageGenerator.getClientNotifyImage(MESSAGE_ACTION_PIN_UPDATE));
+                mPcScoketServer.stop();
                 mNotifyImageGenerator.addDefaultScreen();
                 mHttpServer.start();
+                mPcScoketServer.start();
                 break;
             default:
                 break;
