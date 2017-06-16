@@ -3,13 +3,10 @@ package growing.com.recording.data.data;
 import com.google.firebase.crash.FirebaseCrash;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import static growing.com.recording.BaseApplication.getAppData;
-import static growing.com.recording.BaseApplication.getAppPreference;
 
 /**
  * File: PcScoketServer.java
@@ -52,17 +49,23 @@ public class PcScoketServer {
         private boolean connect() throws IOException {
             mSocket = new Socket();
             mSocket.setKeepAlive(true);
-            mSocket.setSoTimeout(2 * 3 * 60 * 1000);//inputStream read 超时时间
+            mSocket.setSoTimeout(60 * 1000);//inputStream read 超时时间
             mSocket.setTcpNoDelay(true);
-            mSocket.connect(new InetSocketAddress("192.168.0.16", 8000));
+            mSocket.connect(new InetSocketAddress(getAppData().getStrSocketUrl(), getAppData().getStrSocketProt()));
             if (mSocket.isConnected()) {
-                OutputStream stream = mSocket.getOutputStream();
-                InetAddress address = getAppData().getIpAddress();
-                int port = getAppPreference().getSeverPort();
-                String socketStr = address + ":" + port;
-                byte[] bytes = socketStr.getBytes();
-                stream.write(bytes);
-                stream.flush();
+//                OutputStream stream = mSocket.getOutputStream();
+//                InetAddress address = getAppData().getIpAddress();
+//                int port = getAppPreference().getSeverPort();
+//                String socketStr = address + ":" + port;
+//                byte[] bytes = socketStr.getBytes();
+//                stream.write(bytes);
+//                stream.flush();
+//                if (getMainActivityViewModel().isStreaming()) {
+////                    EventBus.getDefault().post(new BusMessages(BusMessages.MESSAGE_ACTION_STREAMING_STOP));
+//                    EventBus.getDefault().post(new BusMessages(BusMessages.MESSAGE_ACTION_STREAMING_TRY_START));
+//                } else {
+////                    EventBus.getDefault().post(new BusMessages(BusMessages.MESSAGE_ACTION_STREAMING_TRY_START));
+//                }
                 return true;
             } else {
                 return false;

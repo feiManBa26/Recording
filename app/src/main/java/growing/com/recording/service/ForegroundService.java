@@ -54,6 +54,11 @@ public final class ForegroundService extends Service {
     private MediaProjectionManager mMediaProjectionManager;
     private MediaProjection mMediaProjection;
     private MediaProjection.Callback mProjectionCallback;
+
+    public static PcScoketServer getPcScoketServer() {
+        return sServiceInstance.mPcScoketServer != null ? sServiceInstance.mPcScoketServer : null;
+    }
+
     private HttpServer mHttpServer;
     private PcScoketServer mPcScoketServer;
     private NotifyImageGenerator mNotifyImageGenerator;
@@ -183,8 +188,8 @@ public final class ForegroundService extends Service {
         registerReceiver(mBroadcastReceiver, screenOnOffAndWiFiFilter);
 
         EventBus.getDefault().register(this);
-        mHttpServer.start();
-        mPcScoketServer.start();
+//        mHttpServer.start();
+//        mPcScoketServer.start();
 
     }
 

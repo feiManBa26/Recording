@@ -40,8 +40,8 @@ public final class AppData {
 
     private volatile boolean isActivityRunning;
     private volatile boolean isStreamRunning;
-    private String strSocketUrl = "192.168.0.16"; //pc ip地址
-    private int strSocketProt = 8000; //pc 端口
+    private String strSocketUrl; //pc ip地址
+    private int strSocketProt; //pc 端口
 
     public String getStrSocketUrl() {
         return strSocketUrl;

@@ -15,14 +15,12 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -84,13 +82,13 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
         //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_content);
-        back = (ImageView) findViewById(R.id.scanner_toolbar_back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        back = (ImageView) findViewById(R.id.scanner_toolbar_back);
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 //		cancelScanButton = (Button) this.findViewById(R.id.btn_cancel_scan);
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
@@ -100,16 +98,16 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
     }
 
     private void addToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        ImageView more = (ImageView) findViewById(R.id.scanner_toolbar_more);
-//        assert more != null;
-//        more.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+////        ImageView more = (ImageView) findViewById(R.id.scanner_toolbar_more);
+////        assert more != null;
+////        more.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////
+////            }
+////        });
+//        setSupportActionBar(toolbar);
     }
 
     @Override

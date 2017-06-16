@@ -122,8 +122,13 @@ public final class MainActivity extends AppCompatActivity {
         super.onStart();
         EventBus.getDefault().register(this);
         getAppData().setActivityRunning(true);
+        EventBus.getDefault().removeStickyEvent(BusMessages.class);
+        if (!getAppData().isWiFiConnected() || getAppData().isStreamRunning()) return;
+        final MediaProjectionManager projectionManager = getProjectionManager();
+        if (projectionManager != null) {
+            startActivityForResult(projectionManager.createScreenCaptureIntent(), REQUEST_CODE_SCREEN_CAPTURE);
+        }
     }
-
 
     @Override
     protected void onDestroy() {
